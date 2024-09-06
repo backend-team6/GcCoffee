@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import programmers.coffee.product.dto.NewProductDTO;
+import programmers.coffee.product.dto.ProductDTO;
 
 @Entity
 @Builder
@@ -61,5 +62,12 @@ public class Product {
 			.price(newProductDTO.getPrice())
 			.description(newProductDTO.getDescription())
 			.build();
+	}
+
+	public void updateProduct(ProductDTO productDTO) {
+		this.productName = productDTO.getProductName();
+		this.category = productDTO.getCategory();
+		this.price = productDTO.getPrice();
+		this.description = productDTO.getDescription();
 	}
 }
