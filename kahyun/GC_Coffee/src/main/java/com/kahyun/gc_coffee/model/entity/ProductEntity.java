@@ -20,11 +20,20 @@ public class ProductEntity {
     private String productName;
     private String category;
     private int price;
+    private String description;
     @Column(name = "created_at")
     private Date createdAt;
     @Column(name = "updated_at")
     private Date updatedAt;
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public UUID getProductId() {
         return productId;

@@ -25,5 +25,10 @@ public class ProductController {
     }
 
     //상품 정보 수정 : PUT
+    @PutMapping
+    public void updateProduct(@RequestBody ProductDTO product){
+        productService.updateProduct(product);
+    }
+
 
 }

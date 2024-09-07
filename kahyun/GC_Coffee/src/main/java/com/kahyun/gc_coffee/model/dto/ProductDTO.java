@@ -7,29 +7,33 @@ import java.util.UUID;
 
 public class ProductDTO {
 
-    private UUID productId; //POST 요청이 들어올 때마다 id가 하나씩 증가하여 메뉴 리스트에 추가될 수 있도록 -> UUID는 랜덤인데...
+    private UUID productIdUUID;
+    private String productId;
     private String productName;
     private String category;
     private int price;
-    private Date createdAt; //필요가 없나?
+    private String description;
+    private Date createdAt;
     private Date updatedAt;
 
     public ProductEntity toEntity(){
         ProductEntity entity=new ProductEntity();
-        entity.setProductId(productId);
+        entity.setProductId(productIdUUID);
         entity.setProductName(productName);
         entity.setCategory(category);
         entity.setPrice(price);
+        entity.setDescription(description);
         entity.setCreatedAt(createdAt);
         entity.setUpdatedAt(updatedAt);
         return entity;
     }
 
     public ProductDTO(ProductEntity entity){
-        this.productId= entity.getProductId();
+        this.productIdUUID= entity.getProductId();
         this.productName= entity.getProductName();
         this.category= entity.getCategory();
         this.price= entity.getPrice();
+        this.description=entity.getDescription();
         this.createdAt= entity.getCreatedAt();
         this.updatedAt=entity.getUpdatedAt();
     }
@@ -43,11 +47,34 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public UUID getProductId() {
+    public ProductDTO(String productName, String category, int price,String description) {
+        this.productName = productName;
+        this.category = category;
+        this.price = price;
+        this.description=description;
+    }
+
+    public UUID getProductIdUUID() {
+        return productIdUUID;
+    }
+
+    public void setProductIdUUID(UUID productIdUUID) {
+        this.productIdUUID = productIdUUID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(UUID productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
