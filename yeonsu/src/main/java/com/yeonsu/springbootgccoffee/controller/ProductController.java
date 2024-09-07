@@ -43,19 +43,25 @@ public class ProductController {
 
     //상품 수정
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable UUID id, @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
         if (productDTO.getProductName() == null && productDTO.getCategory() == null && productDTO.getPrice() == null && productDTO.getDescription() == null) {
             return ResponseEntity.badRequest().body("입력값이 없는데 어떻게 수정을 하니");
         }
 
-        Product product = productService.findProduct(id);
+        try {
+            UUID uuid = UUID.fromString(id); // id 값 유효성 검사 - UUID 형식
+            Product product = productService.findProduct(uuid);
 
-        if (product == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 ID의 상품을 찾을 수 없어요!");
+            if (product == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 ID의 상품을 찾을 수 없어요!");
+            }
+
+            ProductDTO result = productService.updateProduct(product, productDTO);
+            return ResponseEntity.ok(result);
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("id UUID 형식으로 보내주세요~");
         }
-
-        ProductDTO result = productService.updateProduct(product, productDTO);
-        return ResponseEntity.ok(result);
     }
 
     //상품 삭제
