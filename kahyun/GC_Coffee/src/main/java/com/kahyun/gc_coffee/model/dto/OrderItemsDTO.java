@@ -1,14 +1,16 @@
 package com.kahyun.gc_coffee.model.dto;
 
+import com.kahyun.gc_coffee.model.entity.OrderEntity;
 import com.kahyun.gc_coffee.model.entity.OrderItemsEntity;
+import com.kahyun.gc_coffee.model.entity.ProductEntity;
 import java.util.Date;
 import java.util.UUID;
 
 public class OrderItemsDTO {
 
     private int seq;
-    private UUID orderId;
-    private UUID productId;
+    private OrderEntity orderId;
+    private ProductEntity productId;
     private String category;
     private int price;
     private int quantity;
@@ -17,8 +19,8 @@ public class OrderItemsDTO {
 
     public OrderItemsDTO(OrderItemsEntity entity){
         this.seq=entity.getSeq();
-        this.orderId=entity.getOrderId().getOrderId();
-        this.productId=entity.getProductId().getProductId();
+        this.orderId=entity.getOrderId();
+        this.productId=entity.getProductId();
         this.category=entity.getCategory();
         this.price= entity.getPrice();
         this.quantity=entity.getQuantity();
@@ -29,8 +31,8 @@ public class OrderItemsDTO {
     public OrderItemsEntity toEntity(){
         OrderItemsEntity entity=new OrderItemsEntity();
         entity.setSeq(seq);
-//        entity.setOrderId(orderId);
-//        entity.setProductId(productId);
+        entity.setOrderId(orderId);
+        entity.setProductId(productId);
         entity.setCategory(category);
         entity.setPrice(price);
         entity.setQuantity(quantity);
@@ -43,15 +45,16 @@ public class OrderItemsDTO {
     public OrderItemsDTO() {
     }
 
-    public OrderItemsDTO(UUID orderId, UUID productId, String category, int price, int quantity) {
-        this.orderId = orderId;
-        this.productId = productId;
+
+    public OrderItemsDTO(String category, int price, int quantity) {
         this.category = category;
         this.price = price;
         this.quantity = quantity;
     }
 
-    public OrderItemsDTO(String category, int price, int quantity) {
+    public OrderItemsDTO(OrderEntity orderId, ProductEntity productId, String category, int price, int quantity) {
+        this.orderId = orderId;
+        this.productId = productId;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
@@ -65,19 +68,19 @@ public class OrderItemsDTO {
         this.seq = seq;
     }
 
-    public UUID getOrderId() {
+    public OrderEntity getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(OrderEntity orderId) {
         this.orderId = orderId;
     }
 
-    public UUID getProductId() {
+    public ProductEntity getProductId() {
         return productId;
     }
 
-    public void setProductId(UUID productId) {
+    public void setProductId(ProductEntity productId) {
         this.productId = productId;
     }
 

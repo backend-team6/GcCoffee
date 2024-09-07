@@ -2,6 +2,7 @@ package com.kahyun.gc_coffee.model.service;
 
 import com.kahyun.gc_coffee.model.dto.OrderDTO;
 import com.kahyun.gc_coffee.model.dto.OrderItemsDTO;
+import com.kahyun.gc_coffee.model.dto.ProductDTO;
 import com.kahyun.gc_coffee.model.entity.OrderEntity;
 import com.kahyun.gc_coffee.model.entity.OrderItemsEntity;
 import com.kahyun.gc_coffee.model.entity.ProductEntity;
@@ -10,6 +11,7 @@ import com.kahyun.gc_coffee.model.repository.OrderRepository;
 import com.kahyun.gc_coffee.model.repository.ProductRepository;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +27,20 @@ public class OrderService {
     @Autowired
     OrderItemRepository orderItemRepository;
 
-    public OrderItemsDTO order(OrderDTO order){
-        OrderEntity orderEntity=order.toEntity();
+    public void order(OrderDTO order) {
+        OrderEntity orderEntity = order.toEntity();
         orderEntity.setOrderStatus("주문 완료");
         orderEntity.setCreatedAt(new Date());
-        UUID orderId=orderRepository.save(orderEntity).getOrderId();
+        orderRepository.save(orderEntity);
 
-        ProductEntity productEntity=productRepository.findByProductId(order.getProductId());
+        for(ProductDTO product : order.getProducts()) {
+            UUID productId = UUIDService.fromHexString(product.getProductId());
+            ProductEntity productEntity = productRepository.findByProductId(productId);
 
-        OrderItemsDTO orderItemsDTO=new OrderItemsDTO();
-        orderItemsDTO.setOrderId(orderId);
-        orderItemsDTO.setProductId(productEntity.getProductId());
-        orderItemsDTO.setCategory(productEntity.getCategory());
-        orderItemsDTO.setPrice(productEntity.getPrice());
-        orderItemsDTO.setQuantity(order.getQuantity());
-        orderItemsDTO.setCreatedAt(new Date());
-        OrderItemsEntity orderItemsEntity=orderItemsDTO.toEntity();
-        OrderItemsEntity result = orderItemRepository.save(orderItemsEntity);
-        return new OrderItemsDTO(result);
+            OrderItemsDTO orderItemsDTO = new OrderItemsDTO(orderEntity, productEntity, productEntity.getCategory(), productEntity.getPrice(), product.getQuantity());
+            orderItemsDTO.setCreatedAt(new Date());
+            OrderItemsEntity orderItemsEntity = orderItemsDTO.toEntity();
+            orderItemRepository.save(orderItemsEntity);
+        }
     }
 }

@@ -25,7 +25,7 @@ public class OrderItemsEntity {
     private String category;
     private int price;
     private int quantity;
-    @Column(name = "create_at")
+    @Column(name = "created_at")
     private Date createdAt;
     @Column(name = "updated_at")
     private Date updatedAt;

@@ -29,7 +29,7 @@ public class ProductService {
 
     @Transactional
     public void updateProduct(ProductDTO productDTO){
-        UUID productId = fromHexString(productDTO.getProductId());
+        UUID productId = UUIDService.fromHexString(productDTO.getProductId());
         ProductEntity product=em.find(ProductEntity.class, productId);
 
         product.setProductName(productDTO.getProductName());
@@ -39,20 +39,6 @@ public class ProductService {
         product.setDescription(productDTO.getDescription());
     }
 
-    public static UUID fromHexString(String hexString) {
-        if (hexString.startsWith("0x")) {
-            hexString = hexString.substring(2);
-        }
 
-        byte[] bytes = new byte[16];
-        for (int i = 0; i < 16; i++) {
-            bytes[i] = (byte) Integer.parseInt(hexString.substring(2 * i, 2 * i + 2), 16);
-        }
-
-        ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
-        long high = byteBuffer.getLong();
-        long low = byteBuffer.getLong();
-        return new UUID(high, low);
-    }
 
 }

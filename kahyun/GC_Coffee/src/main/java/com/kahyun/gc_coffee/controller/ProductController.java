@@ -30,5 +30,4 @@ public class ProductController {
         productService.updateProduct(product);
     }
 
-
 }

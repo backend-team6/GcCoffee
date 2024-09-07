@@ -3,6 +3,7 @@ package com.kahyun.gc_coffee.model.dto;
 
 import com.kahyun.gc_coffee.model.entity.OrderEntity;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class OrderDTO {
@@ -14,8 +15,7 @@ public class OrderDTO {
     private String orderStatus;
     private Date createdAt;
     private Date updatedAt;
-    private int Quantity;
-    private UUID ProductId;
+    private List<ProductDTO> products;
 
     public OrderDTO(OrderEntity entity){
         this.orderId=entity.getOrderId();
@@ -27,13 +27,11 @@ public class OrderDTO {
         this.updatedAt=entity.getUpdatedAt();
     }
 
-    public OrderDTO(String email, String address, String postcode, String orderStatus, int quantity, UUID productId) {
+    public OrderDTO(String email, String address, String postcode, List<ProductDTO> products) {
         this.email = email;
         this.address = address;
         this.postcode = postcode;
-        this.orderStatus = orderStatus;
-        Quantity = quantity;
-        ProductId = productId;
+        this.products=products;
     }
 
     public OrderEntity toEntity(){
@@ -51,20 +49,13 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public UUID getProductId() {
-        return ProductId;
+
+    public List<ProductDTO> getProducts() {
+        return products;
     }
 
-    public void setProductId(UUID productId) {
-        ProductId = productId;
-    }
-
-    public int getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        Quantity = quantity;
+    public void setProducts(List<ProductDTO> products) {
+        this.products = products;
     }
 
     public OrderDTO(String email, String address, String postcode) {

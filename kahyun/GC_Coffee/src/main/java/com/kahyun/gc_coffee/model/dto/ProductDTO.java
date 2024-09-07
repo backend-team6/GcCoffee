@@ -15,6 +15,7 @@ public class ProductDTO {
     private String description;
     private Date createdAt;
     private Date updatedAt;
+    private int quantity;
 
     public ProductEntity toEntity(){
         ProductEntity entity=new ProductEntity();
@@ -52,6 +53,19 @@ public class ProductDTO {
         this.category = category;
         this.price = price;
         this.description=description;
+    }
+
+    public ProductDTO(String productId, int quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public UUID getProductIdUUID() {
