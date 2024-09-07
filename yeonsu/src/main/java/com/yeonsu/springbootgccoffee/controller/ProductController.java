@@ -22,6 +22,11 @@ public class ProductController {
     //상품 추가
     @PostMapping
     public ResponseEntity<?> insertProduct(@RequestBody ProductDTO productDTO) {
+        //유효성 검사 - productName, category가 null이거나, price가 0일 떄
+        if (productDTO.getProductName() == null || productDTO.getCategory() == null || productDTO.getPrice() == 0) {
+            return ResponseEntity.badRequest().body("productName, category, price 입력 다시 확인해라");
+        }
+
         ProductDTO result = productService.insertProduct(productDTO);
         return ResponseEntity.ok(result);
     }
