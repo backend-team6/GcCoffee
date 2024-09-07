@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -33,5 +35,11 @@ public class ProductService {
 
         // 저장된 Product 엔티티를 DTO로 변환
         return new ProductDTO(savedProduct);
+    }
+
+    public List<ProductDTO> selectProducts() {
+        List<Product> products = productRepository.findAll();
+
+        return products.stream().map(ProductDTO::new).toList();
     }
 }
