@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.UUID;
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity(name="orders")
+@Entity(name = "orders")
 public class OrderEntity {
 
     @Id

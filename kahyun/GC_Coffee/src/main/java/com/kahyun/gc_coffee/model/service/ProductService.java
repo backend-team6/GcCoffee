@@ -6,6 +6,7 @@ import com.kahyun.gc_coffee.model.repository.ProductRepository;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class ProductService {
@@ -13,10 +14,10 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public boolean addProduct(ProductDTO productDTO){
+    public void addProduct(ProductDTO productDTO){
         ProductEntity productEntity=productDTO.toEntity();
         productEntity.setCreatedAt(new Date());
-        ProductEntity result = productRepository.save(productEntity);
-        return result.getProductName().equals(productDTO.getProductName());
+        productRepository.save(productEntity);
     }
+
 }

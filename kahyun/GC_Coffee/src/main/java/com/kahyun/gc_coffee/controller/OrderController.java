@@ -4,32 +4,39 @@ import com.kahyun.gc_coffee.model.dto.OrderDTO;
 import com.kahyun.gc_coffee.model.dto.OrderItemsDTO;
 import com.kahyun.gc_coffee.model.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
+    private final OrderService orderService;
+
     @Autowired
-    OrderService orderService;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     //사용자 주문 : POST
     @PostMapping
-    public ResponseEntity<String> Order(@ModelAttribute OrderDTO order){
-        OrderItemsDTO result = orderService.order(order);
-        if(result.getQuantity()==order.getQuantity())
-            return ResponseEntity.ok().body("성공");
-        else
-            return ResponseEntity.status(500).body("DB 저장 실패");
+    public void order(@RequestBody OrderDTO order){
+        orderService.order(order);
     }
+
+
+
 
     //주문 취소 : DELETE
 
 
 
     //상품 목록 보내기 : GET
+
 }
