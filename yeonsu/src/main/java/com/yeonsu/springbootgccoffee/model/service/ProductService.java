@@ -4,6 +4,7 @@ import com.yeonsu.springbootgccoffee.model.dto.ProductDTO;
 import com.yeonsu.springbootgccoffee.model.entity.Product;
 import com.yeonsu.springbootgccoffee.model.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -71,5 +72,15 @@ public class ProductService {
         Product updateProduct = productRepository.save(product);
 
         return new ProductDTO(updateProduct);
+    }
+
+    public boolean deleteProduct(UUID id) {
+        try {
+            productRepository.deleteById(id); //삭제하고
+            productRepository.existsById(id); //다시 확인했을 때
+            return true; // 삭제 되었으면 return true
+        } catch (EmptyResultDataAccessException e) { //삭제했는데도 존재하면
+            return false;
+        }
     }
 }

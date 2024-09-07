@@ -57,4 +57,18 @@ public class ProductController {
         ProductDTO result = productService.updateProduct(product, productDTO);
         return ResponseEntity.ok(result);
     }
+
+    //상품 삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable String id) {
+        try {
+            UUID uuid = UUID.fromString(id); // id 값 유효성 검사 - UUID 형식
+            if (productService.deleteProduct(uuid)) {
+                return ResponseEntity.ok("삭제됐음!");
+            }
+            return ResponseEntity.badRequest().body("아숩지만 삭제 실패함");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("id UUID 형식으로 보내주세요~");
+        }
+    }
 }
