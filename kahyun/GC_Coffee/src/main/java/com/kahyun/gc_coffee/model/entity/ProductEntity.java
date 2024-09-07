@@ -2,16 +2,20 @@ package com.kahyun.gc_coffee.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import java.util.Date;
 import java.util.UUID;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name="products")
 public class ProductEntity {
 
     @Id
-    @Column(name = "product_id")
-    private UUID productId; //POST 요청이 들어올 때마다 id가 하나씩 증가하여 메뉴 리스트에 추가될 수 있도록 -> UUID는 랜덤인데...
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "product_id", columnDefinition = "BINARY(16)")
+    private UUID productId;
     @Column(name = "product_name")
     private String productName;
     private String category;
