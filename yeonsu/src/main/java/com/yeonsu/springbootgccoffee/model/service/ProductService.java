@@ -29,7 +29,6 @@ public class ProductService {
         product.setPrice(productDTO.getPrice());
         product.setDescription(productDTO.getDescription());
         product.setCreatedAt(LocalDateTime.now());
-        product.setUpdatedAt(LocalDateTime.now());
 
         Product savedProduct = productRepository.save(product);
 
@@ -41,5 +40,36 @@ public class ProductService {
         List<Product> products = productRepository.findAll();
 
         return products.stream().map(ProductDTO::new).toList();
+    }
+
+    public Product findProduct(UUID id) {
+        return productRepository.findByProductId(id);
+    }
+
+    public ProductDTO updateProduct(Product product, ProductDTO productDTO) {
+        String updateProductName = productDTO.getProductName();
+        String updateCategory = productDTO.getCategory();
+        Integer updatePrice = productDTO.getPrice();
+        String updateDescription = productDTO.getDescription();
+
+        if (updateProductName != null) {
+            product.setProductName(updateProductName);
+        }
+
+        if (updateCategory != null) {
+            product.setCategory(updateCategory);
+        }
+
+        if (updatePrice != null) {
+            product.setPrice(updatePrice);
+        }
+
+        if (updateDescription != null) {
+            product.setDescription(updateDescription);
+        }
+        product.setUpdatedAt(LocalDateTime.now());
+        Product updateProduct = productRepository.save(product);
+
+        return new ProductDTO(updateProduct);
     }
 }
