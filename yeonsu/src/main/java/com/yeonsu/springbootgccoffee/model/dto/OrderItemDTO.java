@@ -5,12 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @ToString
 public class OrderItemDTO {
     private Long seq;
-    private ProductDTO product; //productId
+    private UUID productId;
+//    private ProductDTO product; //productId
     private Integer quantity;
 
     public OrderItemDTO() {
@@ -18,7 +21,8 @@ public class OrderItemDTO {
 
     public OrderItemDTO(OrderItem orderItem) {
         this.seq = orderItem.getSeq();
-        this.product = new ProductDTO(orderItem.getProduct());
+        this.productId = orderItem.getProduct().getProductId();
+//        this.product = new ProductDTO(orderItem.getProduct());
         this.quantity = orderItem.getQuantity();
     }
 }

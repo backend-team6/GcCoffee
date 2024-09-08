@@ -22,7 +22,7 @@ public class OrderController {
     //주문 추가
     @PostMapping
     public ResponseEntity<?> insertOrder(@RequestBody OrderDTO orderDTO) {
-        //유효성 검사 - email, address, postcode, orderItems        //orderItems.productDTO, orderItems.productDTO.productId, orderItems.quantity
+        //유효성 검사 - email, address, postcode, orderItems
         if (orderDTO.getEmail() == null || orderDTO.getAddress() == null || orderDTO.getPostcode() == null || orderDTO.getOrderItems().isEmpty()) {
             ResponseEntity.badRequest().body("입력 다시 확인하세요");
         }

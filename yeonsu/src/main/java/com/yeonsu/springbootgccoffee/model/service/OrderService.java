@@ -49,7 +49,7 @@ public class OrderService {
         List<OrderItem> orderItems = new ArrayList<>();
 
         for (OrderItemDTO orderItemDTO: orderItemDTOS) {
-            Product product = productRepository.findByProductId(orderItemDTO.getProduct().getProductId());
+            Product product = productRepository.findByProductId(orderItemDTO.getProductId());
             if (product == null) return null; //id에 해당하는 상품이 없을 때
 
             OrderItem orderItem = new OrderItem();
