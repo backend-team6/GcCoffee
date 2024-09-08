@@ -50,7 +50,7 @@ public class ProductService {
     public ProductDTO updateProduct(Product product, ProductDTO productDTO) {
         String updateProductName = productDTO.getProductName();
         String updateCategory = productDTO.getCategory();
-        Integer updatePrice = productDTO.getPrice();
+        Long updatePrice = productDTO.getPrice();
         String updateDescription = productDTO.getDescription();
 
         if (updateProductName != null) {

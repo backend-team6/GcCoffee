@@ -21,7 +21,7 @@ public class Product {
 
     private String productName;
     private String category;
-    private int price;
+    private Long price;
     private String description;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
