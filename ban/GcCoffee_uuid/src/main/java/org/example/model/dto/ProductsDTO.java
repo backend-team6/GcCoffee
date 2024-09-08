@@ -1,38 +1,31 @@
 package org.example.model.dto;
 
-import org.example.util.IdUtil;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
-import java.util.Date;
+import javax.annotation.processing.Generated;
 import java.util.UUID;
 
 public class ProductsDTO {
-     //byte[] productId;
-    UUID productId;
-    String productName;
-    String category;
-    int price;
-    String description;
-    String created_at;
-    String updated_at;
+    private UUID productId;
+    //private int productId;
+    private String productName;
+    private String category;
+    private int price;
+    private String description;
+    private String created_at;
+    private String updated_at;
 
+    public ProductsDTO(){
+    }
 
-    public ProductsDTO() {}
-
-    public ProductsDTO(String productName, String category, int price, String description) {
+    public ProductsDTO( String productName, String category, int price, String description) {
         this.productName = productName;
         this.category = category;
         this.price = price;
         this.description = description;
     }
 
-  /*  public String getProductId() {
-        return IdUtil.bytesToHex(productId);
-    }
-
-    public void setProductId(byte[] productId) {
-        this.productId = productId;
-    }
-*/
     public UUID getProductId() {
         return productId;
     }
@@ -40,6 +33,15 @@ public class ProductsDTO {
     public void setProductId(UUID productId) {
         this.productId = productId;
     }
+
+ /*   public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }*/
+
     public String getProductName() {
         return productName;
     }
@@ -76,8 +78,8 @@ public class ProductsDTO {
         return created_at;
     }
 
-    public void setCreated_at(String create_at) {
-        this.created_at = create_at;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
     public String getUpdated_at() {
@@ -90,8 +92,7 @@ public class ProductsDTO {
 
     @Override
     public String toString() {
-        return "ProdutcDTO [" + "productId=" + productId + ", productName="
-                + productName + ", category=" + category + ", price=" + price + ", description=" + description
-                + ", created_at=" + created_at + ", updated_at=" + updated_at + "]" + "\n";
+        return "ProductsDTO [productId=" + productId + ", productName=" + productName + ", category=" + category + ", price=" + price
+                + ", description=" + description + "]";
     }
 }

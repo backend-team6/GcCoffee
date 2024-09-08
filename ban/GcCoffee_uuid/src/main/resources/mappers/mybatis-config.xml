@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- TypeHandlers 정의 -->
+    <typeHandlers>
+        <typeHandler javaType="java.util.UUID" handler="org.example.typehandler.UUIDTypeHandler"/>
+    </typeHandlers>
+
+    <!-- 기타 설정 -->
+</configuration>

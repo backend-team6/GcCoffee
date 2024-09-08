@@ -1,13 +1,16 @@
 package org.example;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BanGcCoffeeApplication {
+@MapperScan("org.example.model.repository")
+public class GcCoffeeUuidApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BanGcCoffeeApplication.class, args);
+
+        SpringApplication.run(GcCoffeeUuidApplication.class, args);
     }
 
 }
