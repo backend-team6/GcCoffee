@@ -8,7 +8,8 @@ import java.util.UUID;
 
 public class OrderDTO {
 
-    private UUID orderId;
+    private UUID orderIdUUID;
+    private String orderId;
     private String email;
     private String address;
     private String postcode;
@@ -18,7 +19,7 @@ public class OrderDTO {
     private List<ProductDTO> products;
 
     public OrderDTO(OrderEntity entity){
-        this.orderId=entity.getOrderId();
+        this.orderIdUUID=entity.getOrderId();
         this.email=entity.getEmail();
         this.address=entity.getAddress();
         this.postcode=entity.getPostcode();
@@ -36,7 +37,7 @@ public class OrderDTO {
 
     public OrderEntity toEntity(){
         OrderEntity entity=new OrderEntity();
-        entity.setOrderId(orderId);
+        entity.setOrderId(orderIdUUID);
         entity.setEmail(email);
         entity.setAddress(address);
         entity.setPostcode(postcode);
@@ -64,11 +65,19 @@ public class OrderDTO {
         this.postcode = postcode;
     }
 
-    public UUID getOrderId() {
+    public UUID getOrderIdUUID() {
+        return orderIdUUID;
+    }
+
+    public void setOrderIdUUID(UUID orderIdUUID) {
+        this.orderIdUUID = orderIdUUID;
+    }
+
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

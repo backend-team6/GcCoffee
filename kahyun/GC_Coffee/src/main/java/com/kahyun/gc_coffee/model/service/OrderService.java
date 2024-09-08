@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderService {
@@ -27,6 +28,7 @@ public class OrderService {
     @Autowired
     OrderItemRepository orderItemRepository;
 
+    @Transactional
     public void order(OrderDTO order) {
         OrderEntity orderEntity = order.toEntity();
         orderEntity.setOrderStatus("주문 완료");
@@ -42,5 +44,12 @@ public class OrderService {
             OrderItemsEntity orderItemsEntity = orderItemsDTO.toEntity();
             orderItemRepository.save(orderItemsEntity);
         }
+    }
+
+    @Transactional
+    public void deleteOrder(String orderId){
+        OrderEntity orderEntity=orderRepository.findOrderByOrderId(UUIDService.fromHexString(orderId));
+        orderRepository.deleteByOrderId(UUIDService.fromHexString(orderId));
+        orderItemRepository.deleteByOrderId(orderEntity);
     }
 }
