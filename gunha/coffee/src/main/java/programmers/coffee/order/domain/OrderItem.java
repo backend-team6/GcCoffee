@@ -34,6 +34,8 @@ public class OrderItem {
 	@JoinColumn(name = "order_id")
 	private Order order;
 
+	// 차후 주문 취소시, OrderItem도 삭제되어야 하므로 cascade 적용할 것.
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;

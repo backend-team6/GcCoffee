@@ -1,13 +1,18 @@
 package programmers.coffee.order.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import programmers.coffee.order.dto.OrderDTO;
 import programmers.coffee.order.dto.OrderRequestDTO;
 import programmers.coffee.order.service.OrderService;
 
@@ -32,5 +37,11 @@ public class OrderController {
 		log.info("Status : {}", status);
 		log.info("=== [OrderController.order] End ===");
 		return new ResponseEntity<>(status, HttpStatus.OK);
+	}
+
+	@GetMapping("/order/{email}")
+	public ResponseEntity<?> getOrder(@PathVariable String email) {
+		List<OrderDTO> orders = orderService.getOrders(email);
+		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}
 }

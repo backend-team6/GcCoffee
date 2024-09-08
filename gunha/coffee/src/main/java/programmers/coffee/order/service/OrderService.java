@@ -6,12 +6,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import programmers.coffee.order.domain.Order;
 import programmers.coffee.order.domain.OrderItem;
+import programmers.coffee.order.dto.OrderDTO;
 import programmers.coffee.order.dto.OrderRequestDTO;
 import programmers.coffee.order.repository.OrderItemRepository;
 import programmers.coffee.order.repository.OrderRepository;
@@ -53,5 +55,13 @@ public class OrderService {
 		orderItemRepository.saveAll(orderItems);
 
 		return order.getOrderStatus();
+	}
+
+	public List<OrderDTO> getOrders(String email) {
+		List<Order> byEmail = orderRepository.findByEmail(email, Sort.by(Sort.Direction.ASC, "createdAt"));
+		log.info("=== byEmail ===");
+		 return byEmail.stream()
+			.map(OrderDTO::from)
+			.toList();
 	}
 }

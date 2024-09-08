@@ -2,10 +2,13 @@ package programmers.coffee.order.domain;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -39,6 +42,9 @@ public class Order {
 	private String orderStatus;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+
+	@OneToMany(mappedBy = "order")
+	private List<OrderItem> orderItems = new ArrayList<>();
 
 	@PrePersist
 	public void prePersist() {
