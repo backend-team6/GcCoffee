@@ -4,6 +4,7 @@ import com.yeonsu.springbootgccoffee.model.dto.OrderDTO;
 import com.yeonsu.springbootgccoffee.model.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class OrderController {
     }
 
     //주문 삭제
+    @Transactional
     @DeleteMapping("/{orderId}")
     public ResponseEntity<?> deleteOrder(@PathVariable String orderId) {
         try {
