@@ -7,18 +7,18 @@ import jakarta.persistence.EntityManager;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
-    private EntityManager em;
+    private final ProductRepository productRepository;
+    private final EntityManager em;
 
     public void addProduct(ProductDTO productDTO){
         ProductEntity productEntity=productDTO.toEntity();

@@ -2,6 +2,7 @@ package com.kahyun.gc_coffee.controller;
 
 import com.kahyun.gc_coffee.model.dto.ProductDTO;
 import com.kahyun.gc_coffee.model.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/product")
+@RequiredArgsConstructor
 public class ProductController {
-    @Autowired
-    ProductService productService;
+    private final ProductService productService;
 
     //상품 추가 : POST
     @PostMapping

@@ -12,19 +12,18 @@ import com.kahyun.gc_coffee.model.repository.ProductRepository;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
-    @Autowired
-    OrderRepository orderRepository;
-    @Autowired
-    ProductRepository productRepository;
-    @Autowired
-    OrderItemRepository orderItemRepository;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Transactional
     public void order(OrderDTO order) {
