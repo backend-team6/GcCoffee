@@ -42,14 +42,14 @@ public class ProductController {
     }
 
     //상품 수정
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable String id, @RequestBody ProductDTO productDTO) {
+    @PutMapping("/{productId}")
+    public ResponseEntity<?> updateProduct(@PathVariable String productId, @RequestBody ProductDTO productDTO) {
         if (productDTO.getProductName() == null && productDTO.getCategory() == null && productDTO.getPrice() == null && productDTO.getDescription() == null) {
             return ResponseEntity.badRequest().body("입력값이 없는데 어떻게 수정을 하니");
         }
 
         try {
-            UUID uuid = UUID.fromString(id); // id 값 유효성 검사 - UUID 형식
+            UUID uuid = UUID.fromString(productId); // id 값 유효성 검사 - UUID 형식
             Product product = productService.findProduct(uuid);
 
             if (product == null) {
@@ -65,10 +65,10 @@ public class ProductController {
     }
 
     //상품 삭제
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable String id) {
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable String productId) {
         try {
-            UUID uuid = UUID.fromString(id); // id 값 유효성 검사 - UUID 형식
+            UUID uuid = UUID.fromString(productId); // id 값 유효성 검사 - UUID 형식
             if (productService.deleteProduct(uuid)) {
                 return ResponseEntity.ok("삭제됐음!");
             }

@@ -45,10 +45,10 @@ public class OrderController {
     }
 
     //주문 삭제
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteOrder(@PathVariable String id) {
+    @DeleteMapping("/{orderId}")
+    public ResponseEntity<?> deleteOrder(@PathVariable String orderId) {
         try {
-            UUID uuid = UUID.fromString(id); // order id 값 유효성 검사 - UUID 형식
+            UUID uuid = UUID.fromString(orderId); // order id 값 유효성 검사 - UUID 형식
             if (orderService.deleteOrder(uuid)) {
                 return ResponseEntity.ok("주문 삭제 성공!");
             }
