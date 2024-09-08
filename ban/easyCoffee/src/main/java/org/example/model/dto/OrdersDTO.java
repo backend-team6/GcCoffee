@@ -1,9 +1,13 @@
 package org.example.model.dto;
 
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+
 public class OrdersDTO {
+    @Id
     private int orderId;
     private String email;
     private String address;
@@ -65,10 +69,20 @@ public class OrdersDTO {
         return orderStatus;
     }
 
-    public void setOrderStatus(LocalDateTime dateTime) {
-        if(dateTime.getHour() > 14) this.orderStatus = "출고전";
-        else this.orderStatus = "출고완료";
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
+
+    public void setMyOrderStatus(LocalDateTime now) {
+        if (now.getHour() > 14) {
+            this.orderStatus = "출고전";
+        }
+        else {
+            this.orderStatus = "출고완료";
+        }
+    }
+
+
 
     public LocalDateTime getCreated_at() {
         return created_at;

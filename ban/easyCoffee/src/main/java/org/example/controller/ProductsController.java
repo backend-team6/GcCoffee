@@ -27,6 +27,12 @@ public class ProductsController {
         return list;
     }
 
+    //Test용 findById
+    @GetMapping("/findById")
+    public ProductsDTO findById(@RequestParam int id) throws SQLException {
+        return productsService.findById(id);
+    }
+
     @PutMapping("/update/{productId}")
     public void updateProduct(@PathVariable int productId, @RequestBody ProductsDTO dto) throws SQLException {
         dto.setProductId(productId);

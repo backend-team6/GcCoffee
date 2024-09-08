@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper
 public interface OrdersRepository {
 
-    void insert(OrdersDTO dto) throws SQLException;
+    int insert(OrdersDTO dto) throws SQLException;
     List<OrdersDTO> selectAll()throws SQLException;
 
-    void update(OrdersDTO dto)throws SQLException;
-    //void delete(OrdersDTO dto)throws SQLException;
+    int update(OrdersDTO dto)throws SQLException;
+    void delete(int id)throws SQLException;
 }

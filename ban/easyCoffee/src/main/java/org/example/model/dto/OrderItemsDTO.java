@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
-public class OrderItemDTO {
+public class OrderItemsDTO {
     @Id
     private int seq;
     private int orderId;
@@ -15,7 +15,7 @@ public class OrderItemDTO {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    public OrderItemDTO() {}
+    public OrderItemsDTO() {}
 
     public int getSeq() {
         return seq;
@@ -79,5 +79,11 @@ public class OrderItemDTO {
 
     public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItemsDTO [seq=" + seq + ", orderId=" + orderId + ", productId=" + productId + ", category=" + category
+                + ", price=" + price + ", quantity=" + quantity + ", created_at=" + created_at + "]";
     }
 }

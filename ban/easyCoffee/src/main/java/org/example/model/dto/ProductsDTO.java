@@ -80,5 +80,12 @@ public class ProductsDTO {
     public void setUpdated_at(LocalDate updated_at) {
         this.updated_at = updated_at;
     }
+
+    @Override
+    public String toString() {
+        return "ProductsDTO [productId=" + productId + ", productName=" + productName + ", category="
+                + category + ", price=" + price + ", description=" + description + ", created_at=" + created_at
+                + ", updated_at=" + updated_at + "]";
+    }
 }
 
