@@ -1,8 +1,10 @@
 package programmers.coffee.product.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,5 +40,15 @@ public class ProductService {
 		original.updateProduct(productDTO);
 		ProductDTO updated = ProductDTO.from(original);
 		return updated;
+	}
+
+	public List<ProductDTO> getProducts() {
+
+		// findAll 인자에 생성일자순 정렬 옵션 적용
+
+		List<Product> findAll = productRepository.findAll(Sort.by(Sort.Direction.ASC, "createdAt"));
+		return findAll.stream()
+			.map(ProductDTO::from)
+			.toList();
 	}
 }

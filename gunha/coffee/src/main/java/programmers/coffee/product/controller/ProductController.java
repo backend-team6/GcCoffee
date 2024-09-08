@@ -1,9 +1,11 @@
 package programmers.coffee.product.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,5 +50,16 @@ public class ProductController {
 		log.info("Updated : {}", updated);
 
 		return new ResponseEntity<>(updated, HttpStatus.OK);
+	}
+
+	@GetMapping("/product")
+	public ResponseEntity<List<ProductDTO>> getProducts() {
+		log.info("=== [ProductController.getProducts] Start ===");
+		log.info("=== [ProductService.getProducts] Start ===");
+		List<ProductDTO> products = productService.getProducts();
+		log.info("=== [ProductService.getProducts] End ===");
+		log.info("Products : {}", products);
+		log.info("=== [ProductController.getProducts] End ===");
+		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 }
