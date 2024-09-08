@@ -12,9 +12,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface OrderItemRepository extends JpaRepository<OrderItemsEntity, Integer> {
 
-//    @Modifying
-//    @Query("delete from order_items o where o.orderId = :orderId")
-//    void deleteByOrderId(@Param("orderId") UUID orderId);
-
     void deleteByOrderId(OrderEntity orderEntity);
 }

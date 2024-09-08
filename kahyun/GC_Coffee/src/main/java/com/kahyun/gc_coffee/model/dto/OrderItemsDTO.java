@@ -5,7 +5,15 @@ import com.kahyun.gc_coffee.model.entity.OrderItemsEntity;
 import com.kahyun.gc_coffee.model.entity.ProductEntity;
 import java.util.Date;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItemsDTO {
 
     private int seq;
@@ -41,86 +49,11 @@ public class OrderItemsDTO {
         return entity;
     }
 
-
-    public OrderItemsDTO() {
-    }
-
-
-    public OrderItemsDTO(String category, int price, int quantity) {
-        this.category = category;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
     public OrderItemsDTO(OrderEntity orderId, ProductEntity productId, String category, int price, int quantity) {
         this.orderId = orderId;
         this.productId = productId;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
-    }
-
-    public int getSeq() {
-        return seq;
-    }
-
-    public void setSeq(int seq) {
-        this.seq = seq;
-    }
-
-    public OrderEntity getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(OrderEntity orderId) {
-        this.orderId = orderId;
-    }
-
-    public ProductEntity getProductId() {
-        return productId;
-    }
-
-    public void setProductId(ProductEntity productId) {
-        this.productId = productId;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

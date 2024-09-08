@@ -38,7 +38,4 @@ public class ProductService {
         product.setCategory(productDTO.getCategory());
         product.setDescription(productDTO.getDescription());
     }
-
-
-
 }

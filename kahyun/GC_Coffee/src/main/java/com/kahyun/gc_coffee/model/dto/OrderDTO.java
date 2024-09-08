@@ -5,7 +5,15 @@ import com.kahyun.gc_coffee.model.entity.OrderEntity;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDTO {
 
     private UUID orderIdUUID;
@@ -28,13 +36,6 @@ public class OrderDTO {
         this.updatedAt=entity.getUpdatedAt();
     }
 
-    public OrderDTO(String email, String address, String postcode, List<ProductDTO> products) {
-        this.email = email;
-        this.address = address;
-        this.postcode = postcode;
-        this.products=products;
-    }
-
     public OrderEntity toEntity(){
         OrderEntity entity=new OrderEntity();
         entity.setOrderId(orderIdUUID);
@@ -45,87 +46,5 @@ public class OrderDTO {
         entity.setCreatedAt(createdAt);
         entity.setUpdatedAt(updatedAt);
         return entity;
-    }
-
-    public OrderDTO() {
-    }
-
-
-    public List<ProductDTO> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<ProductDTO> products) {
-        this.products = products;
-    }
-
-    public OrderDTO(String email, String address, String postcode) {
-        this.email = email;
-        this.address = address;
-        this.postcode = postcode;
-    }
-
-    public UUID getOrderIdUUID() {
-        return orderIdUUID;
-    }
-
-    public void setOrderIdUUID(UUID orderIdUUID) {
-        this.orderIdUUID = orderIdUUID;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
