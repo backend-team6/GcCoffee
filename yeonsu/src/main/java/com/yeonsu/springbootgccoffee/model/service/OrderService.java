@@ -9,6 +9,7 @@ import com.yeonsu.springbootgccoffee.model.repository.OrderItemRepository;
 import com.yeonsu.springbootgccoffee.model.repository.OrderRepository;
 import com.yeonsu.springbootgccoffee.model.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -78,5 +79,14 @@ public class OrderService {
         }
 
         return orderDTOS;
+    }
+
+    public boolean deleteOrder(UUID uuid) {
+        try {
+            orderRepository.deleteByOrderId(uuid); //삭제하고
+            return !orderRepository.existsByOrderId(uuid);// 아직 존재한다면 return false, 삭제 되었으면 return true
+        } catch (EmptyResultDataAccessException e) { //uuid에 해당하는 order가 없을 때
+            return false;
+        }
     }
 }
