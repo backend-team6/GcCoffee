@@ -4,10 +4,9 @@ import com.yeonsu.springbootgccoffee.model.dto.OrderDTO;
 import com.yeonsu.springbootgccoffee.model.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -28,6 +27,21 @@ public class OrderController {
         }
 
         OrderDTO result = orderService.insertOrder(orderDTO);
+        if (result == null) {
+            return ResponseEntity.badRequest().body("productId에 해당하는 상품을 찾을 수 없어요!");
+        }
+        return ResponseEntity.ok(result);
+    }
+
+    //고객 주문 내역 조회
+    @GetMapping("/{email}")
+    public ResponseEntity<?> selectOrders(@PathVariable String email) {
+        //유효성 검사 - email
+        if (email == null) {
+            ResponseEntity.badRequest().body("입력 다시 확인하세요");
+        }
+
+        List<OrderDTO> result = orderService.selectOrders(email);
         if (result == null) {
             return ResponseEntity.badRequest().body("productId에 해당하는 상품을 찾을 수 없어요!");
         }

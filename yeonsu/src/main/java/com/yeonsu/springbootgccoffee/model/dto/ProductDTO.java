@@ -15,7 +15,7 @@ public class ProductDTO {
     private UUID productId;
     private String productName;
     private String category;
-    private Long price; //int는 null이 될 수 없으니까 Integer로 바꿨어요~
+    private Long price;
     private String description;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

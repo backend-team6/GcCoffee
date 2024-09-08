@@ -53,7 +53,6 @@ public class OrderService {
 
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(savedOrder);
-            System.out.println(orderItem.getOrder());
             orderItem.setProduct(product);
             orderItem.setPrice(product.getPrice());
             orderItem.setCategory(product.getCategory());
@@ -67,5 +66,17 @@ public class OrderService {
         }
 
         return new OrderDTO(savedOrder, orderItems);
+    }
+
+    public List<OrderDTO> selectOrders(String email) {
+        List<Order> orders = orderRepository.findByEmail(email);
+        if (orders.isEmpty()) return null;
+
+        List<OrderDTO> orderDTOS = new ArrayList<>();
+        for (Order order: orders) {
+            orderDTOS.add(new OrderDTO(order, orderItemRepository.findByOrder(order)));
+        }
+
+        return orderDTOS;
     }
 }
