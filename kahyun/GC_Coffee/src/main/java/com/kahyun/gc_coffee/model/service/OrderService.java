@@ -9,10 +9,8 @@ import com.kahyun.gc_coffee.model.entity.ProductEntity;
 import com.kahyun.gc_coffee.model.repository.OrderItemRepository;
 import com.kahyun.gc_coffee.model.repository.OrderRepository;
 import com.kahyun.gc_coffee.model.repository.ProductRepository;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +49,9 @@ public class OrderService {
         OrderEntity orderEntity=orderRepository.findOrderByOrderId(UUIDService.fromHexString(orderId));
         orderRepository.deleteByOrderId(UUIDService.fromHexString(orderId));
         orderItemRepository.deleteByOrderId(orderEntity);
+    }
+
+    public List<ProductEntity> productList(){
+        return productRepository.findAll();
     }
 }
