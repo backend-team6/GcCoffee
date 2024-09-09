@@ -46,7 +46,7 @@ public class OrderController {
     }
 
     //주문 삭제
-    @Transactional
+    @Transactional  // deleteBy...작업은 트랜잭션 내에서 실행되어야 함. 작업 중 예외 발생 시 롤백 보장해줌
     @DeleteMapping("/{orderId}")
     public ResponseEntity<?> deleteOrder(@PathVariable String orderId) {
         try {
