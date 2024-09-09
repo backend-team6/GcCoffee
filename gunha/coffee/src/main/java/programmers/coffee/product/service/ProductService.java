@@ -51,4 +51,15 @@ public class ProductService {
 			.map(ProductDTO::from)
 			.toList();
 	}
+
+	/**
+	 * 제품 삭제 => 이 제품 주문 내역들은? 지우는 것은 비즈니스상 옳지 않음
+	 * 카테고리를 변경
+	 */
+	@Transactional
+	public void deleteProduct(UUID productId) {
+		Product product = productRepository.findById(productId)
+			.orElseThrow(() -> new NoSuchElementException("존재하지 않는 제품입니다."));
+		product.deleteProduct();
+	}
 }

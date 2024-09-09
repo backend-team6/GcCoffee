@@ -3,9 +3,6 @@ package programmers.coffee.product.domain;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.hibernate.annotations.ColumnDefault;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
@@ -13,7 +10,6 @@ import jakarta.persistence.PreUpdate;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -69,5 +65,9 @@ public class Product {
 		this.category = productDTO.getCategory();
 		this.price = productDTO.getPrice();
 		this.description = productDTO.getDescription();
+	}
+
+	public void deleteProduct() {
+		this.category = "판매중지";
 	}
 }
