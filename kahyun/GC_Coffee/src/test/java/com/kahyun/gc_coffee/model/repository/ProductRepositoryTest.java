@@ -1,12 +1,8 @@
 package com.kahyun.gc_coffee.model.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.kahyun.gc_coffee.model.entity.ProductEntity;
 import java.util.Date;
-import lombok.RequiredArgsConstructor;
 import org.assertj.core.api.Assertions;
-import org.hibernate.procedure.ProcedureOutputs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
