@@ -2,6 +2,9 @@ package programmers.coffee.order.domain;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +33,14 @@ public class OrderItem {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long seq;
 
+	/**
+	 * Order 삭제 시 OrderItem도 삭제될 수 있게 CACADE 옵션 추가
+	 * JPA의 Cascade로 삭제할 시, 실제 DB 상의 CASCADE가 아니라, delete 순서가 바뀐다.
+	 */
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Order order;
 
 	// 차후 주문 취소시, OrderItem도 삭제되어야 하므로 cascade 적용할 것.

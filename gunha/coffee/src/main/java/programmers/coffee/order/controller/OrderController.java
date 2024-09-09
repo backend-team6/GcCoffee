@@ -1,9 +1,11 @@
 package programmers.coffee.order.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,5 +45,17 @@ public class OrderController {
 	public ResponseEntity<?> getOrder(@PathVariable String email) {
 		List<OrderDTO> orders = orderService.getOrders(email);
 		return new ResponseEntity<>(orders, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/order/{orderId}")
+	public ResponseEntity<?> cancel(@PathVariable UUID orderId) {
+		orderService.cancelOrder(orderId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@GetMapping("/order")
+	public ResponseEntity<?> getAllOrders() {
+		List<OrderDTO> allOrders = orderService.getAllOrders();
+		return new ResponseEntity<>(allOrders, HttpStatus.OK);
 	}
 }

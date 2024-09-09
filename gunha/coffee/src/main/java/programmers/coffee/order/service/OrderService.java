@@ -64,4 +64,14 @@ public class OrderService {
 			.map(OrderDTO::from)
 			.toList();
 	}
+
+	public void cancelOrder(UUID orderId) {
+		orderRepository.deleteById(orderId);
+	}
+
+	public List<OrderDTO> getAllOrders() {
+		return orderRepository.findAll().stream()
+			.map(OrderDTO::from)
+			.toList();
+	}
 }
