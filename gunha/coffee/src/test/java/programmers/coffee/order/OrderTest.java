@@ -1,10 +1,11 @@
 package programmers.coffee.order;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import programmers.coffee.order.domain.Order;
+import programmers.coffee.order.domain.OrderItem;
 import programmers.coffee.order.dto.OrderRequestDTO;
+import programmers.coffee.order.repository.OrderItemRepository;
 import programmers.coffee.order.repository.OrderRepository;
 import programmers.coffee.order.service.OrderService;
 import programmers.coffee.product.domain.Product;
@@ -27,9 +30,13 @@ public class OrderTest {
 	OrderService orderService;
 	@Autowired
 	ProductRepository productRepository;
-	UUID orderId;
 	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+
+	UUID orderId;
+	Product product;
 
 	@BeforeEach
 	public void beforeEach() {
@@ -38,7 +45,7 @@ public class OrderTest {
 		productDTO.setCategory("Coffee Bean");
 		productDTO.setDescription("This is Test Coffee Bean");
 		productDTO.setPrice(10000L);
-		Product product = Product.from(productDTO);
+		product = Product.from(productDTO);
 
 		productRepository.save(product);
 
@@ -60,6 +67,9 @@ public class OrderTest {
 			Sort.by(Sort.Direction.ASC, "createdAt")).get(0);
 
 		Order order = orderRepository.findById(orderId).orElseThrow(() -> new NoSuchElementException("저장되지 않음"));
-		Assertions.assertThat(findOrder).isEqualTo(order);
+		assertThat(findOrder).isEqualTo(order);
+
+		OrderItem orderItem = order.getOrderItems().get(0);
+		assertThat(orderItem.getProduct()).isEqualTo(product);
 	}
 }
