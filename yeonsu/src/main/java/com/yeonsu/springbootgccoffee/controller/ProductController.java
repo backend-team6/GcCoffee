@@ -27,7 +27,7 @@ public class ProductController {
     public ResponseEntity<?> insertProduct(@RequestBody ProductDTO productDTO) {
         //유효성 검사 - productName, category, price
         if (productDTO.getProductName() == null || productDTO.getCategory() == null || productDTO.getPrice() == null) {
-            return ResponseEntity.badRequest().body("productName, category, price 입력 다시 확인해라");
+            return ResponseEntity.badRequest().body("productName, category, price 입력 다시 확인하세요");
         }
 
         ProductDTO result = productService.insertProduct(productDTO);
