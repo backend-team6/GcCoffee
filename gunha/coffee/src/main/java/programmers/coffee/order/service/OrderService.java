@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import programmers.coffee.order.domain.Order;
 import programmers.coffee.order.domain.OrderItem;
+import programmers.coffee.order.dto.CreateOrderResponseDTO;
 import programmers.coffee.order.dto.OrderDTO;
 import programmers.coffee.order.dto.OrderRequestDTO;
 import programmers.coffee.order.repository.OrderItemRepository;
@@ -35,7 +36,7 @@ public class OrderService {
 	 * 해결 : QueryDSL을 사용하거나 Mybatis 또는 JDBCTemplate을 사용하여 해결
 	 */
 
-	public String order(OrderRequestDTO orderRequestDTO) {
+	public CreateOrderResponseDTO order(OrderRequestDTO orderRequestDTO) {
 		Order order = Order.from(orderRequestDTO);
 		orderRepository.save(order);
 		log.info("Order : {}", order);
@@ -54,7 +55,7 @@ public class OrderService {
 		}
 		orderItemRepository.saveAll(orderItems);
 
-		return order.getOrderStatus();
+		return CreateOrderResponseDTO.from(order);
 	}
 
 	public List<OrderDTO> getOrders(String email) {

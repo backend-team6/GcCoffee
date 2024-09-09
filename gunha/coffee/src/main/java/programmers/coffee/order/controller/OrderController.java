@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import programmers.coffee.order.dto.CreateOrderResponseDTO;
 import programmers.coffee.order.dto.OrderDTO;
 import programmers.coffee.order.dto.OrderRequestDTO;
 import programmers.coffee.order.service.OrderService;
@@ -33,12 +34,12 @@ public class OrderController {
 		log.info("=== [OrderController.order] Start ===");
 
 		log.info("=== [OrderService.order] Start ===");
-		String status = orderService.order(requestDTO);
+		CreateOrderResponseDTO responseDTO = orderService.order(requestDTO);
 		log.info("=== [OrderService.order] End ===");
 
-		log.info("Status : {}", status);
+		log.info("Status : {}", responseDTO.getStatus());
 		log.info("=== [OrderController.order] End ===");
-		return new ResponseEntity<>(status, HttpStatus.OK);
+		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 	}
 
 	@GetMapping("/order/{email}")
