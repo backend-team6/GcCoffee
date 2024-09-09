@@ -1,6 +1,7 @@
 package com.kahyun.gc_coffee.model.service;
 
 import com.kahyun.gc_coffee.model.dto.ProductDTO;
+import com.kahyun.gc_coffee.model.entity.OrderEntity;
 import com.kahyun.gc_coffee.model.entity.ProductEntity;
 import com.kahyun.gc_coffee.model.repository.ProductRepository;
 import jakarta.persistence.EntityManager;
@@ -23,8 +24,7 @@ public class ProductService {
     public void addProduct(ProductDTO productDTO){
         ProductEntity productEntity=productDTO.toEntity();
         productEntity.setCreatedAt(new Date());
-        UUID uuid= productRepository.save(productEntity).getProductId();
-        System.out.println("\t"+uuid);
+        productRepository.save(productEntity);
     }
 
     @Transactional
