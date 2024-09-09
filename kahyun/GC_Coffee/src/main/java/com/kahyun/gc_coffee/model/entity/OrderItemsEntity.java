@@ -8,9 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 @Entity(name="order_items")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderItemsEntity {
 
     @Id
@@ -29,68 +35,4 @@ public class OrderItemsEntity {
     private Date createdAt;
     @Column(name = "updated_at")
     private Date updatedAt;
-
-    public int getSeq() {
-        return seq;
-    }
-
-    public void setSeq(int seq) {
-        this.seq = seq;
-    }
-
-    public OrderEntity getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(OrderEntity orderId) {
-        this.orderId = orderId;
-    }
-
-    public ProductEntity getProductId() {
-        return productId;
-    }
-
-    public void setProductId(ProductEntity productId) {
-        this.productId = productId;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }
