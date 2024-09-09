@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -29,7 +30,7 @@ import programmers.coffee.order.dto.OrderRequestDTO;
 @ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "orders")
 public class Order {
 
@@ -43,7 +44,8 @@ public class Order {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
+	@Builder.Default
 	private List<OrderItem> orderItems = new ArrayList<>();
 
 	@PrePersist
@@ -70,5 +72,9 @@ public class Order {
 			.address(requestDTO.getAddress())
 			.postCode(requestDTO.getPostCode())
 			.build();
+	}
+
+	public void registerOrderItem(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 }

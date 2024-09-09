@@ -38,9 +38,6 @@ public class OrderService {
 
 	public CreateOrderResponseDTO order(OrderRequestDTO orderRequestDTO) {
 		Order order = Order.from(orderRequestDTO);
-		orderRepository.save(order);
-		log.info("Order : {}", order);
-
 		Map<UUID, Integer> orderItemDTOs = orderRequestDTO.getOrderItems();
 		Set<UUID> productIds = orderItemDTOs.keySet();
 
@@ -53,7 +50,9 @@ public class OrderService {
 			orderItems.add(orderItem);
 			log.info("OrderItem : {}", orderItem);
 		}
-		orderItemRepository.saveAll(orderItems);
+
+		order.registerOrderItem(orderItems);
+		orderRepository.save(order);
 
 		return CreateOrderResponseDTO.from(order);
 	}
