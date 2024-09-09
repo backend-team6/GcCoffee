@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import java.util.Date;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class OrderItemsEntity {
 
     @Id
